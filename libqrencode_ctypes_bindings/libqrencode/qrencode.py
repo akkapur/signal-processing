@@ -28,7 +28,7 @@ import optparse
 import os
 import sys
 
-from _qrencode import *
+from ._qrencode import *
 
 
 class Error(Exception):
@@ -94,7 +94,7 @@ class QRcode_List(QREncode, list):
             super(QRcode_List, self).__init__(p)
             while p:
                 self.append(QRcode(p.contents.code, cleanup=False))
-                p = p.contents.next
+                p = p.contents.__next__
         else:
             raise ValueError('Invalid pointer to QRcode_List c structure')
 
@@ -436,9 +436,9 @@ def main(argv):
     else:
         try:
             from PIL import Image
-        except Exception, e:
+        except Exception as e:
             e = 'Cannot write image %s, %s' % (options.filename, str(e))
-            print >> sys.stderr, e
+            print(e, file=sys.stderr)
         def saveimage(filename, qr):
             qrim = Image.new('1', (len(qr),)*2)
             qrim.putdata([0 if symbol else 1 for row in qr for symbol in row])

@@ -50,7 +50,7 @@ def mls(n, seed=None):
 def main(nbits):
     """Main Program"""
     import pylab
-    import filter
+    from . import filter
     nbits = int(nbits)
     m = mls(nbits)
     pylab.figure()

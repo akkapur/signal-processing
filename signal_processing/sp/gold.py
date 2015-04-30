@@ -6,8 +6,8 @@ Module providing the functionality to generate Gold Codes / Sequences
 import numpy
 import pylab
 
-import filter
-import mls
+from . import filter
+from . import mls
 
 
 preferred_pairs = {5:[[2],[1,2,3]], 6:[[5],[1,4,5]], 7:[[4],[4,5,6]],
@@ -42,13 +42,13 @@ def paper_eg():
     Spreading Codes for Direct Sequence CDMA and Wideband CDMA Cellular 
     Networks"""
     seq1 = mls.lfsr([2],[1, 1, 1, 1, 1])
-    print 'Sequence 1:', numpy.where(seq1, 1, 0)
+    print('Sequence 1:', numpy.where(seq1, 1, 0))
     seq2 = mls.lfsr([1, 2, 3], [1, 1, 1, 1, 1])
-    print 'Sequence 2:', numpy.where(seq2, 1, 0)
+    print('Sequence 2:', numpy.where(seq2, 1, 0))
     gold = gen_gold(seq1, seq2)
-    print 'Gold 0 shift combination:', numpy.where(gold[0], 1, 0)
-    print 'Gold 1 shift combination:', numpy.where(gold[1], 1, 0)
-    print 'Gold 30 shift combination:', numpy.where(gold[-1], 1, 0)
+    print('Gold 0 shift combination:', numpy.where(gold[0], 1, 0))
+    print('Gold 1 shift combination:', numpy.where(gold[1], 1, 0))
+    print('Gold 30 shift combination:', numpy.where(gold[-1], 1, 0))
     
     pylab.figure()
     pylab.subplot(2,2,1)
@@ -73,16 +73,16 @@ def web_eg():
     """Example of producing Gold Codes from the net 
     (http://paginas.fe.up.pt/~hmiranda/cm/Pseudo_Noise_Sequences.pdf)"""
     seq1 = mls.lfsr([1],[1,0,0])
-    print 'Sequence 1:', numpy.where(seq1, 1, 0)
+    print('Sequence 1:', numpy.where(seq1, 1, 0))
     seq2 = mls.lfsr([2], [1,0,0])
-    print 'Sequence 2:', numpy.where(seq2, 1, 0)
+    print('Sequence 2:', numpy.where(seq2, 1, 0))
     for gold in gen_gold(seq1, seq2):
-        print 'Gold Code:', numpy.where(gold, 1, 0)
+        print('Gold Code:', numpy.where(gold, 1, 0))
 
 
 def main(nbits):
     """Main Program"""
-    print nbits
+    print(nbits)
     if nbits != None:
         g = gold(nbits)
         #plotting
@@ -108,9 +108,9 @@ def main(nbits):
         pylab.xlim(0, len(g0))
         pylab.show()
     else:
-        print 'Paper Example:'
+        print('Paper Example:')
         paper_eg()
-        print 'Web Example:'
+        print('Web Example:')
         web_eg()
 
 

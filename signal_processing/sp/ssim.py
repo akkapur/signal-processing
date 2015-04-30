@@ -10,7 +10,7 @@ import numpy
 from scipy import signal
 from scipy import ndimage
 
-import gauss
+from . import gauss
 
 
 def ssim(img1, img2, cs_map=False):
@@ -81,16 +81,16 @@ def main():
     import pylab
     argv = sys.argv
     if len(argv) != 3:
-        print >>sys.stderr, 'usage: python -m sp.ssim image1.tif image2.tif'
+        print('usage: python -m sp.ssim image1.tif image2.tif', file=sys.stderr)
         sys.exit(2)
 
     try:
         from PIL import Image
         img1 = numpy.asarray(Image.open(argv[1]))
         img2 = numpy.asarray(Image.open(argv[2]))
-    except Exception, e:
+    except Exception as e:
         e = 'Cannot load images' + str(e)
-        print >> sys.stderr, e
+        print(e, file=sys.stderr)
 
     ssim_map = ssim(img1, img2)
     ms_ssim = msssim(img1, img2)

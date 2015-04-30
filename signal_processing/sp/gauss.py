@@ -34,7 +34,7 @@ def main():
     import pylab
     argv = sys.argv
     if len(argv) != 3:
-        print >>sys.stderr, 'usage: python -m pim.sp.gauss size sigma'
+        print('usage: python -m pim.sp.gauss size sigma', file=sys.stderr)
         sys.exit(2)
     size = int(argv[1])
     sigma = float(argv[2])
